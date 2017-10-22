@@ -8,17 +8,17 @@ var router = express.Router();
 
 
 router.get('/', (req: any, res: any) => {
-    res.render('index', { user: req.user });
+    res.render('pages/index', { user: req.user });
 });
 
 router.get('/register', (req: any, res: any) => {
-    res.render('register', {});
+    res.render('auth/register', {});
 });
 
 router.post('/register', (req: any, res: any, next: any) => {
     account.register(new account({ username: req.body.username }), req.body.password, (err, account) => {
         if (err) {
-            return res.render('register', { error: err.message });
+            return res.render('auth/register', { error: err.message });
         }
 
         passport.authenticate('local')(req, res, () => {
@@ -34,7 +34,7 @@ router.post('/register', (req: any, res: any, next: any) => {
 
 
 router.get('/login', (req: any, res: any) => {
-    res.render('login', { user: req.user, error: req.flash('error') });
+    res.render('auth/login', { user: req.user, error: req.flash('error') });
 });
 
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req: any, res: any, next: any) => {
