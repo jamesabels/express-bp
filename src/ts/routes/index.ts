@@ -15,7 +15,7 @@ router.get('/register', (req: any, res: any) => {
     res.render('register', {});
 });
 
-router.post('/register', (req: any, res: any, next) => {
+router.post('/register', (req: any, res: any, next: any) => {
     account.register(new account({ username: req.body.username }), req.body.password, (err, account) => {
         if (err) {
             return res.render('register', { error: err.message });
@@ -37,7 +37,7 @@ router.get('/login', (req: any, res: any) => {
     res.render('login', { user: req.user, error: req.flash('error') });
 });
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req: any, res, next) => {
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req: any, res: any, next: any) => {
     req.session.save((err) => {
         if (err) {
             return next(err);
@@ -46,7 +46,7 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login'
     });
 });
 
-router.get('/logout', (req: any, res: any, next) => {
+router.get('/logout', (req: any, res: any, next: any) => {
     req.logout();
     req.session.save((err) => {
         if (err) {
