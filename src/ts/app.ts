@@ -51,7 +51,7 @@ passport.deserializeUser(account.deserializeUser());
 mongoose.connect('mongodb://localhost/passport_local_mongoose_express4', { useMongoClient: true });
 
 // catch 404 and forward to error handler
-app.use(function(req: any, res: any, next: any) {
+app.use(function (req: any, res: any, next: any) {
     var err = new Error('Not Found');
     err.message = '404';
     next(err);
@@ -62,7 +62,7 @@ app.use(function(req: any, res: any, next: any) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err: any, req: any, res: any, next: any) {
+    app.use(function (err: any, req: any, res: any, next: any) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -73,7 +73,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err: any, req: any, res: any, next: any) {
+app.use(function (err: any, req: any, res: any, next: any) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
