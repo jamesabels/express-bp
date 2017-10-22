@@ -1,0 +1,13 @@
+/log/*.log
+/tmp
+.DS_Store
+.idea/
+.sass-cache
+*~
+node_modules
+*.out
+npm-debug.log
+.DS_Store
+dist/
+.tscache
+.vscode
