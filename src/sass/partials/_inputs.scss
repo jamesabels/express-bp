@@ -1,0 +1,18 @@
+input {
+    background: whitesmoke;
+    width: calc(100% - 10px);
+    padding: 10px 0px 10px 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 0px;
+}
+input:focus {
+    outline: none;
+    border: 1px solid;
+    border-color: grey !important;
+    border-radius: 0px;
+}
+input:-webkit-autofill {
+    box-shadow:  0 0 0 30px whitesmoke inset;
+    -webkit-box-shadow:  0 0 0 30px whitesmoke inset;
+}

@@ -1,16 +1,13 @@
 extends ../layouts/layout
 
 block content
-  .container
-    h1 Register Page
-    p.lead Say something worthwhile here.
-    br
-    form(role='form', action="/register",method="post", style='max-width: 300px;')
-      .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username')
-      .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      button.btn.btn-default(type='submit') Submit
-      &nbsp;
-      a(href='/')
-        button.btn.btn-primary(type="button") Cancel
+  h1 Register Page
+  p Say something worthwhile here.
+  br
+  form(role='form', action="/register",method="post", style='max-width: 300px;')
+    input(type='text', name="username", placeholder='Enter Username')
+    input(type='password', name="password", placeholder='Password')
+    button(type='submit') Submit
+    &nbsp;
+    a(href='/')
+      button(type="button") Cancel
