@@ -1,13 +1,13 @@
 extends ../layouts/layout
 
 block content
-  h1 Login Page
+  h1 Register Page
   p Say something worthwhile here.
   br
-  form(role='form', action="/login",method="post", style='max-width: 300px;')
+  form(role='form', action="/register",method="post", style='max-width: 300px;')
     input(type='text', name="username", placeholder='Enter Username')
     input(type='password', name="password", placeholder='Password')
     button(type='submit') Submit
-    &nbsp;
+    nbsp
     a(href='/')
       button(type="button") Cancel
