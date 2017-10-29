@@ -8,17 +8,49 @@ export default class IndexRoute {
     constructor (app: any) {
         this.app = app;
     }
-    init () {
-        let router = express.Router();
 
-        router.get('/', (req: any, res: any) => {
-            res.render('pages/index', {user: req.user});
+    _initLoginRoutes(router: express.Router) {
+        // Get user login view
+        router.get('/login', (req: any, res: any) => {
+            res.render('auth/login', {user: req.user, error: req.flash('error')});
         });
 
+        // Post a user login
+        router.post('/login', passport.authenticate('local', {
+            failureRedirect: '/login',
+            failureFlash: true
+        }), (req: any, res: any, next: any) => {
+            req.session.save((err) => {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect('/');
+            });
+        });
+
+
+    }
+
+    _initLogoutRoutes (router: express.Router) {
+        // log a user out
+        router.get('/logout', (req: any, res: any, next: any) => {
+            req.logout();
+            req.session.save((err) => {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect('/');
+            });
+        });
+    }
+
+    _initRegisterRoutes (router: express.Router) {
+        // Get registration view
         router.get('/register', (req: any, res: any) => {
             res.render('auth/register', {});
         });
 
+        // Post a user registration
         router.post('/register', (req: any, res: any, next: any) => {
             accountModel.register(new accountModel({username: req.body.username}), req.body.password, (err, account) => {
                 if (err) {
@@ -35,36 +67,27 @@ export default class IndexRoute {
                 });
             });
         });
+    }
 
-        router.get('/login', (req: any, res: any) => {
-            res.render('auth/login', {user: req.user, error: req.flash('error')});
+    _initMiscRoutes (router: express.Router) {
+        // Get index view
+        router.get('/', (req: any, res: any) => {
+            res.render('pages/index', {user: req.user});
         });
 
-        router.post('/login', passport.authenticate('local', {
-            failureRedirect: '/login',
-            failureFlash: true
-        }), (req: any, res: any, next: any) => {
-            req.session.save((err) => {
-                if (err) {
-                    return next(err);
-                }
-                res.redirect('/');
-            });
-        });
-
-        router.get('/logout', (req: any, res: any, next: any) => {
-            req.logout();
-            req.session.save((err) => {
-                if (err) {
-                    return next(err);
-                }
-                res.redirect('/');
-            });
-        });
-
+        // Server test route
         router.get('/ping', (req: any, res: any) => {
             res.status(200).send('pong!');
         });
+    }
+
+    init () {
+        let router = express.Router();
+
+        this._initMiscRoutes(router);
+        this._initLoginRoutes(router);
+        this._initRegisterRoutes(router);
+        this._initLogoutRoutes(router);
 
         return router;
     }
