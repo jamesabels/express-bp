@@ -9,6 +9,14 @@ p, a, th, td, li, h1, h2, h3, h4, h5, h6 {
   color: lighten(#333333, 25%);
 }
 
+label {
+  font-size: 9px;
+  text-transform: uppercase;
+  color: lighten(#333333, 60%);
+  letter-spacing: 0.08em;
+  margin: 5px 0 20px 0;
+}
+
 p, a {
   font-size: 13px;
   line-height: 0.01em;

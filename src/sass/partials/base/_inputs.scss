@@ -16,3 +16,19 @@ input:-webkit-autofill {
     box-shadow:  0 0 0 30px whitesmoke inset;
     -webkit-box-shadow:  0 0 0 30px whitesmoke inset;
 }
+
+select {
+    background: whitesmoke;
+    height: 33px;
+    width: 100%;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 0px;
+}
+
+select:focus {
+    outline: none;
+    border: 1px solid;
+    border-color: grey !important;
+    border-radius: 0px;
+}

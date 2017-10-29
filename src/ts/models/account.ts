@@ -5,7 +5,8 @@ let Schema = mongoose.Schema;
 
 let account = new Schema({
     username: String,
-    password: String
+    password: String,
+    role: String,
 });
 
 account.plugin(passportLocalMongoose);

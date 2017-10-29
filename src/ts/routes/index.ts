@@ -12,7 +12,7 @@ export default class IndexRoute {
     private _initLoginRoutes(router: express.Router) {
         // Get user login view
         router.get('/login', (req: any, res: any) => {
-            res.render('auth/login', {user: req.user, error: req.flash('error')});
+            res.render('pages/universal/auth/login', {user: req.user, error: req.flash('error')});
         });
 
         // Post a user login
@@ -47,14 +47,15 @@ export default class IndexRoute {
     private _initRegisterRoutes (router: express.Router) {
         // Get registration view
         router.get('/register', (req: any, res: any) => {
-            res.render('auth/register', {});
+            res.render('pages/universal/auth/register', {});
         });
 
         // Post a user registration
         router.post('/register', (req: any, res: any, next: any) => {
-            accountModel.register(new accountModel({username: req.body.username}), req.body.password, (err, account) => {
+            console.log('REGISTERED USER ', req);
+            accountModel.register(new accountModel({username: req.body.username, role: req.body.role}), req.body.password, (err, account) => {
                 if (err) {
-                    return res.render('auth/register', {error: err.message});
+                    return res.render('pages/universal/auth/register', {error: err.message});
                 }
 
                 passport.authenticate('local')(req, res, () => {
@@ -72,7 +73,7 @@ export default class IndexRoute {
     private _initMiscRoutes (router: express.Router) {
         // Get index view
         router.get('/', (req: any, res: any) => {
-            res.render('pages/index', {user: req.user});
+            res.render('routes/index', {user: req.user});
         });
 
         // Server test route

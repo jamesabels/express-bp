@@ -1,0 +1,10 @@
+extends ../layouts/layout
+
+block content
+  if (!user)
+    include ../components/titlebar
+  if (user)
+    if (user && user.role === 'admin')
+      include ../pages/admin/index
+    if (user && user.role === 'user')
+      include ../pages/user/index

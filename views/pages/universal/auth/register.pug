@@ -1,13 +1,19 @@
-extends ../layouts/layout
+extends ../../../layouts/layout
 
 block content
   h1 Register Page
   p Say something worthwhile here.
   br
-  form(role='form', action="/register",method="post", style='max-width: 300px;')
+  form(id='registrationForm' role='form', action="/register", method="post", style='max-width: 300px;')
+    label User Role
+    select(name='role')
+      option(value='user') User
+      option(value='admin') Admin
+    label Username
     input(type='text', name="username", placeholder='Enter Username')
+    label Password
     input(type='password', name="password", placeholder='Password')
+    br
     button(type='submit') Submit
-    nbsp
     a(href='/')
       button(type="button") Cancel
