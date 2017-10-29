@@ -9,7 +9,7 @@ export default class IndexRoute {
         this.app = app;
     }
 
-    _initLoginRoutes(router: express.Router) {
+    private _initLoginRoutes(router: express.Router) {
         // Get user login view
         router.get('/login', (req: any, res: any) => {
             res.render('auth/login', {user: req.user, error: req.flash('error')});
@@ -31,7 +31,7 @@ export default class IndexRoute {
 
     }
 
-    _initLogoutRoutes (router: express.Router) {
+    private _initLogoutRoutes (router: express.Router) {
         // log a user out
         router.get('/logout', (req: any, res: any, next: any) => {
             req.logout();
@@ -44,7 +44,7 @@ export default class IndexRoute {
         });
     }
 
-    _initRegisterRoutes (router: express.Router) {
+    private _initRegisterRoutes (router: express.Router) {
         // Get registration view
         router.get('/register', (req: any, res: any) => {
             res.render('auth/register', {});
@@ -69,7 +69,7 @@ export default class IndexRoute {
         });
     }
 
-    _initMiscRoutes (router: express.Router) {
+    private _initMiscRoutes (router: express.Router) {
         // Get index view
         router.get('/', (req: any, res: any) => {
             res.render('pages/index', {user: req.user});
