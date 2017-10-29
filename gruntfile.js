@@ -38,13 +38,13 @@ module.exports = function (grunt) {
     ts: {
       app: {
         files: [{
-          src: ["src/ts/\*\*/\*.ts", "!src/ts/.baseDir.ts", "!src/ts/_all.d.ts"],
+          src: ["src/ts/\*\*/\*.ts"],
           dest: "./dist/"
         }],
         options: {
           rootDir: "./src/ts/",
           module: "commonjs",
-          noLib: true,
+          noLib: false,
           target: "es6",
           sourceMap: false
         }
@@ -63,7 +63,7 @@ module.exports = function (grunt) {
         options: { livereload: true },
         files: ['dist/**/*'],
       },
-      files: ["src/\*\*/\*.ts", "src/\*\*/\*.scss", 'views/\*\*/\*.jade'],
+      files: ["src/\*\*/\*.ts", "src/\*\*/\*.scss", 'views/\*\*/\*.pug'],
       tasks: ["default"]
     }
   });

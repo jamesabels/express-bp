@@ -1,22 +1,26 @@
-/// <reference path="../_all.d.ts" />
 'use strict';
 
 // dependencies
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var localStrategy = require('passport-local').Strategy;
-var flash = require('connect-flash');
+import * as express from 'express';
+import * as path from 'path';
+import * as favicon from 'serve-favicon';
+import * as logger from 'morgan';
+import * as cookieParser from 'cookie-parser';
+import * as bodyParser from 'body-parser';
+import * as mongoose from 'mongoose';
+import * as passport from 'passport';
+import * as local from 'passport-local';
+import * as flash from 'connect-flash';
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+// Import Routes
+import IndexRoute from './routes/index';
+import UserRoute from './routes/users';
 
-var app = express();
+// Import Models
+import { accountModel } from './models/account';
+
+let app = express();
+let localStrategy = local.Strategy;
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -39,21 +43,24 @@ app.use(flash());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, '/public')));
 
+// Define Routes
+let index = new IndexRoute(app).init();
+let users = new UserRoute(app).init();
 
-app.use('/', routes);
+app.use('/', index);
+app.use('/users', users);
 
 // passport config
-var account = require('./models/account');
-passport.use(new localStrategy(account.authenticate()));
-passport.serializeUser(account.serializeUser());
-passport.deserializeUser(account.deserializeUser());
+passport.use(new localStrategy(accountModel.authenticate()));
+passport.serializeUser(accountModel.serializeUser());
+passport.deserializeUser(accountModel.deserializeUser());
 
 // mongoose
 mongoose.connect('mongodb://localhost/passport_local_mongoose_express4', { useMongoClient: true });
 
 // catch 404 and forward to error handler
 app.use(function (req: any, res: any, next: any) {
-    var err = new Error('Not Found');
+    let err = new Error('Not Found');
     err.message = '404';
     next(err);
 });
@@ -81,6 +88,5 @@ app.use(function (err: any, req: any, res: any, next: any) {
         error: {}
     });
 });
-
 
 module.exports = app;

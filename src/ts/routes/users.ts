@@ -1,12 +1,20 @@
-/// <reference path="../../_all.d.ts" />
 'use strict';
+import * as express from 'express';
 
-var express = require('express');
-var router = express.Router();
+export default class UserRoute {
+    app;
+    constructor (app: any ) {
+        this.app = app;
+    }
 
-/* GET users listing. */
-router.get('/', (req: any, res: any, next: any) => {
-  res.send('respond with a resource');
-});
+    init () {
+        let router = express.Router();
 
-module.exports = router;
+        /* GET users listing. */
+        router.get('/', function (req: express.Request, res: express.Response, next: any) {
+            res.send('respond with a resource');
+        });
+
+        return router;
+    }
+}
