@@ -73,7 +73,7 @@ export default class IndexRoute {
     private _initMiscRoutes (router: express.Router) {
         // Get index view
         router.get('/', (req: any, res: any) => {
-            res.render('routes/index', {user: req.user});
+            res.render('routes/index', { user: req.user});
         });
 
         // Server test route

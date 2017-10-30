@@ -13,11 +13,11 @@ import * as local from 'passport-local';
 import * as flash from 'connect-flash';
 
 // Import Routes
-import IndexRoute from './routes/index';
-import UserRoute from './routes/users';
+import IndexRoute from './server/routes/index';
+import UserRoute from './server/routes/users';
 
 // Import Models
-import { accountModel } from './models/account';
+import { accountModel } from './server/models/account';
 
 let app = express();
 let localStrategy = local.Strategy;

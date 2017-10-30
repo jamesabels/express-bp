@@ -10,7 +10,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'dist/public/stylesheets/style.css': 'src/sass/style.scss'
+          'dist/public/stylesheets/style.css': 'src/public/sass/style.scss'
         }
       }
     },
@@ -38,12 +38,13 @@ module.exports = function (grunt) {
     ts: {
       app: {
         files: [{
-          src: ["src/ts/\*\*/\*.ts"],
+          src: ["src/public/js/\*\*/\*.ts", "src/\*\*/\*.ts"],
           dest: "./dist/"
         }],
         options: {
-          rootDir: "./src/ts/",
+          rootDir: "./src/",
           module: "commonjs",
+          jsx: 'preserve',
           noLib: false,
           target: "es6",
           sourceMap: false
@@ -63,7 +64,7 @@ module.exports = function (grunt) {
         options: { livereload: true },
         files: ['dist/**/*'],
       },
-      files: ["src/\*\*/\*.ts", "src/\*\*/\*.scss", 'views/\*\*/\*.pug'],
+      files: ["src/\*\*/\*.ts", "src/\*\*/\*.tsx", "src/\*\*/\*.scss", 'views/\*\*/\*.pug'],
       tasks: ["default"]
     }
   });
