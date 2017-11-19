@@ -1,6 +1,7 @@
 'use strict';
 import * as express from 'express';
 import * as passport from 'passport';
+import * as path from 'path';
 import { accountModel } from '../models/account';
 
 export default class IndexRoute {
@@ -15,7 +16,15 @@ export default class IndexRoute {
             res.render('pages/universal/auth/login', {user: req.user, error: req.flash('error')});
         });
 
-        // Post a user login
+        /**
+        * @api {post} /login Login to the server
+        * @apiName LoginUser
+        * @apiGroup Auth
+        *
+        * @apiParam {String} username The user's username.
+        * @apiParam {String} password The user's password.
+        *
+        */
         router.post('/login', passport.authenticate('local', {
             failureRedirect: '/login',
             failureFlash: true
@@ -32,7 +41,11 @@ export default class IndexRoute {
     }
 
     private _initLogoutRoutes (router: express.Router) {
-        // log a user out
+        /**
+        * @api {get} /logout Logout of the server.
+        * @apiName LogoutUser
+        * @apiGroup Auth
+        */
         router.get('/logout', (req: any, res: any, next: any) => {
             req.logout();
             req.session.save((err) => {
@@ -50,14 +63,17 @@ export default class IndexRoute {
             res.render('pages/universal/auth/register', {});
         });
 
-        // Post a user registration
+        /**
+        * @api {post} /register Register a new account with the server.
+        * @apiName RegisterUser
+        * @apiGroup Auth
+        *
+        * @apiParam {String} username The user's username.
+        * @apiParam {String} password The user's password.
+        *
+        */
         router.post('/register', (req: any, res: any, next: any) => {
-            console.log('REGISTERED USER ', req);
             accountModel.register(new accountModel({username: req.body.username, role: req.body.role}), req.body.password, (err, account) => {
-                if (err) {
-                    return res.render('pages/universal/auth/register', {error: err.message});
-                }
-
                 passport.authenticate('local')(req, res, () => {
                     req.session.save((err) => {
                         if (err) {
@@ -76,7 +92,12 @@ export default class IndexRoute {
             res.render('routes/index', { user: req.user});
         });
 
-        // Server test route
+        /**
+        * @api {get} /ping Test the server's connection
+        * @apiName PingServer
+        * @apiGroup Utils
+        *
+        */
         router.get('/ping', (req: any, res: any) => {
             res.status(200).send('pong!');
         });

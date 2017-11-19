@@ -9,5 +9,6 @@ node_modules
 npm-debug.log
 .DS_Store
 dist/
+docs/
 .tscache
 .vscode

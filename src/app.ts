@@ -42,6 +42,7 @@ app.use(passport.initialize());
 app.use(flash());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/public/docs')));
 
 // Define Routes
 let index = new IndexRoute(app).init();
