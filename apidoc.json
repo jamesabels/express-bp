@@ -1,0 +1,7 @@
+{
+    "name": "express-bp",
+    "version": "0.0.0",
+    "description": "A basic express server with local auth.",
+    "title": "Express BP",
+    "url" : "http://localhost:3000"
+}

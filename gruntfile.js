@@ -58,6 +58,17 @@ module.exports = function (grunt) {
         src: ["src/\*\*/\*.ts"]
       }
     },
+    apidoc: {
+      mypp: {
+        src: "src/",
+        dest: "docs/",
+        options: {
+          debug: true,
+          includeFilters: [ ".*\\.ts$" ],
+          excludeFilters: [ "node_modules/", "views", "public" ]
+        }
+      }
+    },    
     watch: {
       livereload: {
         options: { livereload: true },
@@ -74,6 +85,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-ts");
   grunt.loadNpmTasks("grunt-tslint");
   grunt.loadNpmTasks('grunt-livereload');
+  grunt.loadNpmTasks('grunt-apidoc');
 
   grunt.registerTask("default", [
     "ts",
@@ -81,6 +93,7 @@ module.exports = function (grunt) {
     "sass",
     "autoprefixer",
     "cssmin",
+    "apidoc"
   ]);
 
 };
