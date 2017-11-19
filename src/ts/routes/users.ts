@@ -24,7 +24,7 @@ export default class UserRoute {
         /**
         * @api {get} /user/:id Request User information by ID
         * @apiName GetUserById
-        * @apiGroup User
+        * @apiGroup Users
         *
         * @apiParam {Number} id Users unique ID.
         *
