@@ -1,1 +1,0 @@
-{  "name": "express-bp",  "version": "0.0.0",  "description": "A basic express server with local auth.",  "title": "Express BP",  "url": "http://localhost:3000",  "sampleUrl": false,  "defaultVersion": "0.0.0",  "apidoc": "0.3.0",  "generator": {    "name": "apidoc",    "time": "2017-11-19T19:02:11.484Z",    "url": "http://apidocjs.com",    "version": "0.17.6"  }}
