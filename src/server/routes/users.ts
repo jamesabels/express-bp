@@ -3,13 +3,13 @@ import * as express from 'express';
 
 export default class UserRoute {
     app;
+    router;
     constructor (app: any ) {
         this.app = app;
+        this.router = express.Router();
     }
 
     init () {
-        let router = express.Router();
-
         /**
         * @api {get} /users Request a list of all users
         * @apiName GetUsers
@@ -17,8 +17,8 @@ export default class UserRoute {
         *
         * @apiSuccess {Array} users An array of user objects.
         */
-        router.get('/users', function (req: express.Request, res: express.Response, next: any) {
-            res.send('TODO: Query user by ID');
+        this.router.get('/', function (req: express.Request, res: express.Response, next: any) {
+            res.status(200).send('TODO: Query list of users');
         });
 
         /**
@@ -32,10 +32,10 @@ export default class UserRoute {
         * @apiSuccess {String} lastname  Last name of the User.
         * @apiSuccess {String} role User's account role.
         */
-        router.get('/user/:id', function (req: express.Request, res: express.Response, next: any) {
-            res.send('TODO: Query user by ID');
+        this.router.get('/:id', function (req: express.Request, res: express.Response, next: any) {
+            res.status(200).send(`TODO: Query list of users by ID ${req.params.id}`);
         });
 
-        return router;
+        return this.router;
     }
 }

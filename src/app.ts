@@ -15,6 +15,7 @@ import * as flash from 'connect-flash';
 // Import Routes
 import IndexRoute from './server/routes/index';
 import UserRoute from './server/routes/users';
+import AuthRoute from './server/routes/auth';
 
 // Import Models
 import { accountModel } from './server/models/account';
@@ -22,13 +23,8 @@ import { accountModel } from './server/models/account';
 let app = express();
 let localStrategy = local.Strategy;
 
-// view engine setup
-app.set('views', path.join(__dirname, '../views'));
-app.set('view engine', 'pug');
-app.set('view options', {layout: false});
-
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,13 +38,14 @@ app.use(passport.initialize());
 app.use(flash());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, '/public')));
-app.use(express.static(path.join(__dirname, '/public/docs')));
 
 // Define Routes
 let index = new IndexRoute(app).init();
 let users = new UserRoute(app).init();
+let auth = new AuthRoute(app).init();
 
 app.use('/', index);
+app.use('/auth', auth);
 app.use('/users', users);
 
 // passport config
@@ -73,7 +70,7 @@ app.use(function (req: any, res: any, next: any) {
 if (app.get('env') === 'development') {
     app.use(function (err: any, req: any, res: any, next: any) {
         res.status(err.status || 500);
-        res.render('components/universal/error', {
+        res.send({
             message: err.message,
             error: err
         });
@@ -84,9 +81,9 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function (err: any, req: any, res: any, next: any) {
     res.status(err.status || 500);
-    res.render('components/universal/error', {
+    res.send({
         message: err.message,
-        error: {}
+        error: err
     });
 });
 
